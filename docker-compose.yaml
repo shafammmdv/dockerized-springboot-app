@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+
+  spring-app-1:
+    build:
+      context: dockerized-app-1
+      dockerfile: ./Dockerfile
+    image: hello-app-1:v1
+    networks:
+      - hello-apps
+    environment:
+      SERVER_PORT: 8080
+    ports:
+      - "8090:8080"
+
+  spring-app-2:
+    build:
+      context: dockerized-app-2
+    image: hello-app-2:v1
+    networks:
+      - hello-apps
+    ports:
+      - "8091:8080"
+
+  spring-app-3:
+    build:
+      context: dockerized-app-3
+    image: hello-app-3:v1
+    networks:
+      - hello-apps
+    ports:
+      - "8092:8080"
+
+networks:
+  hello-apps:
+    name: hello-apps
+    driver: bridge
+
+
+
+
+
